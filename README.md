@@ -68,3 +68,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### all action toward our backend are going to be done using redus we need to dispatch those actions to do what we have to add some boilerplate code meaning we have to create a new files and folder but later on bigger applications, this is going to be great because the scale ability
