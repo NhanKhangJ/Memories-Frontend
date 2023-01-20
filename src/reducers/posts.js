@@ -1,6 +1,6 @@
 //reducer is the function that accept the state and also accept the action
 //And in reducers the state always needs to be equal to something
-import { FETCH_ALL, UPDATE, DELETE, CREATE, FETCH_BY_SEARCH, START_LOADING, END_LOADING, LIKE } from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_POST ,UPDATE, DELETE, CREATE, FETCH_BY_SEARCH, START_LOADING, END_LOADING, LIKE, COMMENT } from '../constants/actionTypes';
 
 export default (state = { isLoading: true, posts: []}, action) =>{ 
     switch(action.type){
@@ -17,10 +17,25 @@ export default (state = { isLoading: true, posts: []}, action) =>{
             }
         case FETCH_BY_SEARCH:
             return { ...state, posts: action.payload.data}
+        case FETCH_POST:
+            return { ...state, post: action.payload}    
         case LIKE:
-            return { ...state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post)) };        
+            return { ...state, posts: state.posts.map((post) => (post._id === action.payload._id ? action.payload : post)) };
+        case COMMENT:
+            return {
+                ...state,
+                posts: state.posts.map((post) =>{
+                         // Change the post that just received a comment
+                    if(post._id=== action.payload._id){
+                        return action.payload;
+                    }
+                             // return all the post normally
+                    return post;
+               
+                })
+            }           
         case CREATE:
-            return [ ...state.posts, action.payload];
+            return { ...state, posts: [...state.posts, action.payload] };
         case UPDATE: 
             return { ...state, posts: state.posts.map((post)=> (post._id === action.payload._id ? action.payload : post))};
         case DELETE:

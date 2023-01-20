@@ -5,7 +5,8 @@ import {Link, useHistory, useLocation } from 'react-router-dom';
 import decode from 'jwt-decode'
 
 import memoriesLogo from '../../images/memories-Logo.png'
-import memoriesText from '../../images/memories-Text.png'
+import memoriesText from '../../images/memories-Text.png';
+import * as actionType from '../../constants/actionTypes';
 import { useDispatch } from 'react-redux';
 
 
@@ -18,22 +19,23 @@ const Navbar = () => {
   
     const logout= () =>{
       dispatch({
-        type: 'LOGOUT'
+        type: actionType.LOGOUT
       });
-      history.push('/');
+      history.push('/auth');
 
       setUser(null)
     }
-    useEffect(()=>{
+    useEffect(() => {
       const token = user?.token;
+  
       if (token) {
         const decodedToken = decode(token);
   
-        if (decodedToken.exp * 1000 < new Date().getTime()) logout(); //check exprire jwt token
+        if (decodedToken.exp * 1000 < new Date().getTime()) logout();
       }
   
       setUser(JSON.parse(localStorage.getItem('profile')));
-    },[location])
+    }, [location]);
   return (
     <AppBar className={classes.appBar} position='static' color='inherit'>
     <Link to="/" className={classes.brandContainer}>

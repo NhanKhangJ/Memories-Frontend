@@ -1,11 +1,11 @@
 import { Container, Grid, Grow, Paper, AppBar, TextField, Button } from '@material-ui/core'
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react';
 import { useHistory, useLocation } from 'react-router-dom'; //location to know which page we are currently in, use histody to navigate to certain pages
 import ChipInput from 'material-ui-chip-input'
 import Posts from '../Posts/Posts' 
 import Form from '../Form/Form'
 import { useDispatch } from 'react-redux';
-import { getPosts, getPostsBySearch } from '../../actions/posts'
+import { getPostsBySearch } from '../../actions/posts'
 import Pagination from '../Pagination';
 import useStyles from './styles'
 
@@ -14,7 +14,7 @@ function useQuery(){
 }
 
 const Home = () => {
-    const [currentId, setCurrentId ] = useState(0)
+    const [currentId, setCurrentId] = useState(0)
     const classes = useStyles(); 
     const dispatch = useDispatch();
 
